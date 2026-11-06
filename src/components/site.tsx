@@ -102,18 +102,20 @@ export function Portfolio() {
           {projects.map((project, index) => {
             const body = (
               <>
-                <div className="project-heading">
-                  <p className="project-num">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3>{project.title}</h3>
+                <div className="project-copy">
+                  <div className="project-heading">
+                    <p className="project-num">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h3>{project.title}</h3>
+                  </div>
+                  <p className="project-summary">{project.summary}</p>
+                  <ul className="project-stack">
+                    {project.stack.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="project-summary">{project.summary}</p>
-                <ul className="stack">
-                  {project.stack.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
                 <ProjectGallery shots={project.shots} />
               </>
             );
