@@ -76,7 +76,12 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <a className="btn btn-small" href={`mailto:${profile.email}`}>
+          <a
+            className="btn btn-small"
+            href={profile.mailHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Написать
           </a>
           <button
@@ -103,7 +108,12 @@ export function Header() {
           <a href="#contact" onClick={close}>
             Контакт
           </a>
-          <a className="nav-panel-mail" href={`mailto:${profile.email}`}>
+          <a
+            className="nav-panel-mail"
+            href={profile.mailHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {profile.email}
           </a>
         </nav>

@@ -286,7 +286,12 @@ export function Contact() {
       <div className="wrap">
         <p className="kicker">07 — Контакт</p>
         <h2>Написать напрямую</h2>
-        <a className="contact-mail" href={`mailto:${profile.email}`}>
+        <a
+          className="contact-mail"
+          href={profile.mailHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {profile.email}
         </a>
         <p className="contact-note">

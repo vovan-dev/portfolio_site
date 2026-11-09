@@ -3,7 +3,9 @@ export const profile = {
   givenName: "Владимир",
   familyName: "Базан",
   title: "Senior Full-Stack Developer",
-  email: "bve3390@mail.ru",
+  email: "vovan10083390@gmail.com",
+  mailHref:
+    "https://mail.google.com/mail/?view=cm&fs=1&to=vovan10083390@gmail.com",
   years: "2010 — 2026",
   lede: "Более 10 лет создаю и сопровождаю веб-приложения и корпоративные системы: SaaS-платформы, REST API, серверную архитектуру и производительность.",
   summary:
