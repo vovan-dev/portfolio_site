@@ -1,6 +1,10 @@
+import type { ReactNode } from "react";
+import { ContactForm } from "@/components/contact-form";
 import { ProjectGallery } from "@/components/project-gallery";
 import { projects } from "@/data/portfolio";
 import {
+  contactCopy,
+  contactFacts,
   education,
   focus,
   principles,
@@ -10,20 +14,46 @@ import {
   skillGroups,
 } from "@/data/resume";
 
+function FooterLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: ReactNode;
+}) {
+  if (!href) {
+    return (
+      <span className="footer-link" aria-hidden="true">
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      className="footer-link"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+    >
+      {children}
+    </a>
+  );
+}
+
 function SectionHead({
-  index,
   kicker,
   title,
 }: {
-  index: string;
   kicker: string;
   title: string;
 }) {
   return (
     <div className="section-head">
-      <p className="kicker">
-        {index} — {kicker}
-      </p>
+      <p className="kicker">{kicker}</p>
       <h2>{title}</h2>
     </div>
   );
@@ -73,7 +103,6 @@ export function Profile() {
     <section className="section" id="profile">
       <div className="wrap">
         <SectionHead
-          index="01"
           kicker="Профиль"
           title="Коммерческая разработка с 2010 года"
         />
@@ -97,7 +126,7 @@ export function Portfolio() {
   return (
     <section className="section" id="portfolio">
       <div className="wrap">
-        <SectionHead index="02" kicker="Портфолио" title="Проекты" />
+        <SectionHead kicker="Портфолио" title="Проекты" />
         <div className="projects">
           {projects.map((project, index) => {
             const body = (
@@ -148,7 +177,6 @@ export function Results() {
     <section className="section" id="results">
       <div className="wrap">
         <SectionHead
-          index="03"
           kicker="Результаты"
           title="Измеримые изменения в продуктах"
         />
@@ -178,7 +206,6 @@ export function Experience() {
     <section className="section" id="experience">
       <div className="wrap">
         <SectionHead
-          index="04"
           kicker="Опыт"
           title="Пять этапов коммерческой практики"
         />
@@ -236,7 +263,6 @@ export function Skills() {
     <section className="section" id="skills">
       <div className="wrap">
         <SectionHead
-          index="05"
           kicker="Навыки"
           title="Стек, на котором держится практика"
         />
@@ -262,7 +288,6 @@ export function Education() {
     <section className="section" id="education">
       <div className="wrap">
         <SectionHead
-          index="06"
           kicker="Образование"
           title="Специалитет, 2010"
         />
@@ -284,26 +309,94 @@ export function Contact() {
   return (
     <section className="section contact" id="contact">
       <div className="wrap">
-        <p className="kicker">07 — Контакт</p>
-        <h2>Написать напрямую</h2>
-        <a
-          className="contact-mail"
-          href={profile.mailHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {profile.email}
-        </a>
-        <p className="contact-note">
-          {profile.title}. Веб-приложения, корпоративные системы, API и
-          производительность.
-        </p>
+        <p className="kicker">{contactCopy.kicker}</p>
+        <h2>{contactCopy.title}</h2>
+        <p className="contact-note">{contactCopy.note}</p>
+        <dl className="contact-facts">
+          {contactFacts.map((fact) => (
+            <div key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd>
+                {"href" in fact && fact.href ? (
+                  <a href={fact.href} target="_blank" rel="noopener noreferrer">
+                    {fact.value}
+                  </a>
+                ) : (
+                  fact.value
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <ContactForm />
       </div>
       <footer className="footer">
-        <div className="wrap footer-bar">
-          <p>{profile.name}</p>
-          <p>{profile.title}</p>
-          <p>© 2026</p>
+        <div className="wrap">
+          <div className="footer-links">
+            <FooterLink href={profile.phoneHref} label="Позвонить">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M8.2 3.8h2.1l1.1 3.1-1.8 1.1a12 12 0 0 0 5.4 5.4l1.1-1.8 3.1 1.1v2.1a1.8 1.8 0 0 1-2 1.8A14.2 14.2 0 0 1 6.4 5.8a1.8 1.8 0 0 1 1.8-2z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </FooterLink>
+            <FooterLink href={profile.telegramHref} label="Telegram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M20.8 4.6 3.4 11.2l5.7 1.9 1.8 5.6 2.7-3.4 4.4 3.3 2.8-14z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M9.1 13.1 17.6 7.4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </FooterLink>
+            <FooterLink
+              href={profile.mailHref}
+              label={`Написать на ${profile.email}`}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M4 6.5h16v11H4z"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
+                <path
+                  d="M4.5 7.2 12 13l7.5-5.8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </FooterLink>
+            <FooterLink href={profile.githubHref} label="GitHub">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 3.2a8.8 8.8 0 0 0-2.8 17.1c.44.08.6-.19.6-.42v-1.5c-2.45.53-2.97-1.18-2.97-1.18-.4-1.02-.98-1.29-.98-1.29-.8-.55.06-.54.06-.54.88.06 1.35.91 1.35.91.78 1.35 2.06.96 2.56.73.08-.57.31-.96.56-1.18-1.96-.22-4.02-.98-4.02-4.36 0-.96.34-1.75.9-2.37-.09-.22-.39-1.12.09-2.33 0 0 .74-.24 2.42.9a8.4 8.4 0 0 1 4.4 0c1.68-1.14 2.42-.9 2.42-.9.48 1.21.18 2.11.09 2.33.56.62.9 1.41.9 2.37 0 3.39-2.07 4.13-4.04 4.35.32.28.6.82.6 1.66v2.46c0 .23.16.51.61.42A8.8 8.8 0 0 0 12 3.2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </FooterLink>
+          </div>
+          <div className="footer-bar">
+            <p>
+              © 2026 {profile.name} · {profile.title} (JavaScript / TypeScript /
+              Python)
+            </p>
+          </div>
         </div>
       </footer>
     </section>

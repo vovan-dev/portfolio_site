@@ -76,14 +76,6 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <a
-            className="btn btn-small"
-            href={profile.mailHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Написать
-          </a>
           <button
             type="button"
             className={`nav-toggle${open ? " is-open" : ""}`}
@@ -105,9 +97,6 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <a href="#contact" onClick={close}>
-            Контакт
-          </a>
           <a
             className="nav-panel-mail"
             href={profile.mailHref}

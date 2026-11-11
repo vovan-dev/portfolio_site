@@ -3,9 +3,12 @@ export const profile = {
   givenName: "Владимир",
   familyName: "Базан",
   title: "Senior Full-Stack Developer",
-  email: "vovan10083390@gmail.com",
+  email: "vovan10083390@gmail.comimage.png",
   mailHref:
     "https://mail.google.com/mail/?view=cm&fs=1&to=vovan10083390@gmail.com",
+  phoneHref: "",
+  telegramHref: "",
+  githubHref: "https://vladimir-site-gules.vercel.app/",
   years: "2010 — 2026",
   lede: "Более 10 лет создаю и сопровождаю веб-приложения и корпоративные системы: SaaS-платформы, REST API, серверную архитектуру и производительность.",
   summary:
@@ -35,6 +38,25 @@ export const principles = [
   },
 ];
 
+export const contactCopy = {
+  kicker: "Контакты",
+  title: "Давайте обсудим вашу задачу по разработке.",
+  note: "Если вам нужен разработчик, который берёт на себя ответственность за технические решения и доводит задачи до результата — напишите мне.",
+};
+
+export const contactFacts = [
+  {
+    label: "Email",
+    value: profile.email,
+    href: profile.mailHref,
+  },
+  {
+    label: "Роль",
+    value:
+      "Senior Full-Stack Developer | JavaScript / TypeScript / Python | React, Next.js, Node.js, NestJS, FastAPI",
+  },
+];
+
 export const nav = [
   { id: "profile", label: "Профиль" },
   { id: "portfolio", label: "Портфолио" },
@@ -42,6 +64,7 @@ export const nav = [
   { id: "experience", label: "Опыт" },
   { id: "skills", label: "Навыки" },
   { id: "education", label: "Образование" },
+  { id: "contact", label: "Контакт" },
 ] as const;
 
 export const results = [
